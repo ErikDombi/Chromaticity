@@ -1,8 +1,46 @@
-name: KotlinPluginTemplate
-main: org.simplemc.plugintemplate.KotlinPluginTemplate
+name: Chromaticity
+main: org.simplemc.plugintemplate.Chromaticity
 version: "${version}"
 api-version: "${apiVersion}"
 website: https://github.com/SimpleMC/mc-kotlin-plugin-template
-author: tajobe
+commands:
+  togglechroma:
+    description: Toggle Chromaticity
+    usage: /togglechroma [PlayerName]
+    permission: chromaticity.command.toggle
+  setchroma:
+    description: Set Chromaticity Color
+    usage: /setchroma <StartColor> <EndColor> [PlayerName]
+    permission: chromaticity.command.set
+permissions:
+  chromaticity.chat:
+    description: Allows colored chat
+    default: op
+  chromaticity.command.toggle:
+    description: Allows user to toggle coloured chat
+    default: op
+  chromaticity.command.toggle.others:
+    description: Allows user to toggle coloured chat
+    default: op
+  chromaticity.command.set:
+    description: Allows user to set their chat color
+    default: op
+  chromaticity.command.set.others:
+    description: Allows user to set other users chat color
+    default: op
+  chromaticity.command.*:
+    description: Wildcard command permission
+    default: op
+    children:
+      chromaticity.command.set: true
+      chromaticity.command.toggle: true
+      chromaticity.command.toggle.others: true
+      chromaticity.command.set.others: true
+  chromaticity.*:
+    description: Wildcard permission
+    default: op
+    children:
+      chromaticity.command.*: true
+      chromaticity.chat: true
 libraries:
   - org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}

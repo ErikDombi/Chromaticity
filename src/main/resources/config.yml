@@ -1,1 +1,6 @@
 someconfig: true
+players:
+  wickedlizerd:
+    startColor: '#42a4f5'
+    endColor: '#e330cb'
+    enabled: true

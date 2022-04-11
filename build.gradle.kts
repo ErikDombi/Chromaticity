@@ -11,6 +11,7 @@ buildscript {
     repositories {
         mavenCentral()
     }
+
     dependencies {
         classpath("org.yaml:snakeyaml:1.30")
     }
@@ -69,11 +70,13 @@ repositories {
     mavenCentral()
     maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
     maven("https://oss.sonatype.org/content/repositories/snapshots")
+    maven("https://jitpack.io")
 }
 
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
     compileOnly(group = "org.spigotmc", name = "spigot-api", version = "$mcApiVersion+")
+    // implementation("com.github.MilkBowl:VaultAPI:1.7")
 }
 
 tasks {
@@ -128,5 +131,11 @@ tasks {
 
     build {
         dependsOn(shadowJar).dependsOn(configureShadowRelocation)
+        finalizedBy("copy")
     }
+}
+
+tasks.register<Copy>("copy") {
+    from(file("./build/libs/mc-kotlin-plugin-template-0.1.0-SNAPSHOT-offline.jar"))
+    into(file("../../Desktop/Dev Server/plugins/"))
 }
